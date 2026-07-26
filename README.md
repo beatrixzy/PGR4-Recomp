@@ -3,8 +3,9 @@ This project intends to decompile (and eventually port to pc) Project Gotham Rac
 ### Please note:
 This project is VERY early in its progress, however updates are quite frequent!
 ## Current **known** issues
-* Pre-AVX2 Machines can't run this at the moment (a DLL should be able to fix this)
-* NVIDIA Cards (or at least, mine) have some graphical issues
+* Pre-AVX2 machines can't run this at the moment, no idea why but they can't
+* NVIDIA GPU's (or at least, mine) have some graphical issues related to the UI, where some aspects are just pitch black (appears to be some functions needed to be manually lifted)
+* Crashes on Steam Deck (acts as if its loading, then crashes)
 
 ## Current Progress
 - [x] GOD Files
