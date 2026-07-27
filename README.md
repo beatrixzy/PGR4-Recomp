@@ -1,4 +1,4 @@
-# PGR4-Decomp
+# PGR4-Recomp
 This project intends to port Project Gotham Racing 4 to PC / any x86_64 hardware (providing they can run an exe).
 > See the current status of the recompilation [here!](https://github.com/beatrixzy/PGR4-Decomp/blob/main/Status.md)
 ## Current **known** issues
