@@ -1,7 +1,15 @@
 # PGR4-Decomp
 This project intends to port Project Gotham Racing 4 to PC / any x86_64 hardware (providing they can run an exe).
-### Please note:
-This project is VERY early in its progress, however updates are quite frequent!
+## How to run:
+* Download the latest release
+* Download [extract-xiso](https://github.com/xboxdev/extract-xiso) to extract game files from an ISO
+* Download [god2iso](https://github.com/raburton/god2iso) (necessary for a dump from an actual disk!!!)
+* Run god2iso and convert the Game On Demand (god) to an ISO file
+* Run extract-xiso and save the game files to a safe directory
+* Open the ``run.bat`` file in the PGR4 Recomp area
+* Edit the path to the game data root and save changes.
+* Run the ``start.bat``
+* The game should launch!
 ## Current **known** issues
 * Pre-AVX2 machines can't run this at the moment, no idea why but they can't
 * ~~NVIDIA GPU's (or at least, mine) have some graphical issues related to the UI, where some aspects are just pitch black~~ Fix found for this problem.
