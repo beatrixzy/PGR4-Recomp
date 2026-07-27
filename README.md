@@ -1,17 +1,23 @@
 # PGR4-Decomp
-This project intends to decompile (and eventually port to pc) Project Gotham Racing 4.
+This project intends to port Project Gotham Racing 4 to PC / any x86_64 hardware (providing they can run an exe).
 ### Please note:
 This project is VERY early in its progress, however updates are quite frequent!
 ## Current **known** issues
 * Pre-AVX2 machines can't run this at the moment, no idea why but they can't
-* NVIDIA GPU's (or at least, mine) have some graphical issues related to the UI, where some aspects are just pitch black (appears to be some functions needed to be manually lifted)
+* ~~NVIDIA GPU's (or at least, mine) have some graphical issues related to the UI, where some aspects are just pitch black~~ Fix found for this problem.
 * Crashes on Steam Deck (acts as if its loading, then crashes)
+## Current status of the game
+- [x] UI Renders
+- [X] Races work
+- [X] AI Works
+- [X] Fully stable
+- [ ] Graphics Work (mostly, just some minor bugs, leaving unchecked for now)
 
 ## Current Progress
 - [x] GOD Files
 - [x] C++ Converted files
-- [X] Launchable EXE (on AVX2+ hardware, non AVX2 capable hw in testing)
-- [ ] Installer EXE (provide your own files)
+- [X] Launchable EXE (on AVX2+ hardware, non AVX2 capable hw doesn't seem to like it.)
+- [ ] Installer EXE (provide your own files) - Possibly not needed providing instructions are made.
 ### Optional features
 - [ ] Adjustable graphics settings
 - [ ] Online (unlikely)
