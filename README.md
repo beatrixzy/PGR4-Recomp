@@ -4,13 +4,6 @@ This project intends to port Project Gotham Racing 4 to PC / any x86_64 hardware
 * Pre-AVX2 machines can't run this at the moment, no idea why but they can't
 * ~~NVIDIA GPU's (or at least, mine) have some graphical issues related to the UI, where some aspects are just pitch black~~ Fix found for this problem.
 * Crashes on Steam Deck (acts as if its loading, then crashes)
-## Current status of the game
-- [x] UI Renders
-- [X] Races work
-- [X] AI Works
-- [X] Fully stable
-- [ ] Graphics Work (mostly, just some minor bugs, leaving unchecked for now)
-
 ## Current Progress
 - [x] GOD Files
 - [x] C++ Converted files
