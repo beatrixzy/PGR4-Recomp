@@ -1,7 +1,7 @@
 # PGR4-Recomp
 This project intends to port Project Gotham Racing 4 to PC / any x86_64 hardware (providing they can run an exe).
 > See the current status of the recompilation [here!](https://github.com/beatrixzy/PGR4-Decomp/blob/main/Status.md)
-> This project is now in the works of being compatible with the [Goopie Launcher!](https://goopie.xyz)
+* This project is now in the works of being compatible with the [Goopie Launcher!](https://goopie.xyz)
 ## Current **known** issues
 * Pre-AVX2 machines can't run this at the moment, no idea why but they can't
 * Crashes on Steam Deck (acts as if its loading, then crashes)
