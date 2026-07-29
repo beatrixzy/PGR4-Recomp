@@ -8,7 +8,7 @@ This project intends to port Project Gotham Racing 4 to PC / any x86_64 hardware
 * Lotus Espirit Essex Turbo doesn't seem to load and freezes the game
 * Game being on a different drive appears to cause issues, for now, keep the EXE and extracted game files on the same drive (preferably the C drive)
 ## Current Progress
-- [x] GOD Files
+- [x] Extracted Game Files (from Disc / ISO)
 - [x] C++ Converted files
 - [X] Launchable EXE (on AVX2+ hardware, non AVX2 capable hw doesn't seem to like it.)
 - [ ] Installer EXE (provide your own files) - Possibly not needed providing instructions are made.
