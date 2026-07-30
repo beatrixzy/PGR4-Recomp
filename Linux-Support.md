@@ -1,1 +1,1 @@
-making this now, yes this does mean some kind of linux support is on the way, no exact ETA for it, but there WILL be one.
+binary made, having some issues related to audio but it *does* launch to some extent.
