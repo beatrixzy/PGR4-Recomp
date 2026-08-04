@@ -1,1 +1,1 @@
-binary made, having some issues related to audio but it *does* launch to some extent.
+Linux support delayed until I can get it to launch into the game, if you wanna test the game on linux, use [goopie](https://goopie.xyz)
