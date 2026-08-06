@@ -1,6 +1,7 @@
 # PGR4-Recomp
 This project intends to port Project Gotham Racing 4 to PC / any x86_64 hardware (providing they can run an exe).
-> See the current status of the recompilation [here!](https://github.com/beatrixzy/PGR4-Recomp/blob/main/Status.md)
+* Join the official discord [here!](https://discord.gg/FwfykKCFTK)
+* See the current status of the recompilation [here!](https://github.com/beatrixzy/PGR4-Recomp/blob/main/Status.md)
 * This project is now on [Goopie Launcher!](https://goopie.xyz)
 * See future plans for this project [here!](https://github.com/beatrixzy/PGR4-Recomp/blob/main/Future-plans.md)
 ### Development temporarily slowed.
@@ -17,8 +18,6 @@ This project intends to port Project Gotham Racing 4 to PC / any x86_64 hardware
 - [ ] Installer EXE (provide your own files) - Possibly not needed providing instructions are made.
 ### Optional features
 - [ ] Adjustable graphics settings
-- [ ] Online (unlikely)
-- [ ] Mod Support (equally as unlikely as online) 
 ## Notes
 * This is a ONE person effort at the current moment in time, commits will NOT be frequent.
 * ANY help is appreciated greatly, feel free to contribute to this project!
