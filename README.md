@@ -4,7 +4,7 @@ This project intends to port Project Gotham Racing 4 to PC / any x86_64 hardware
 * This project is now in the approval stage on [Goopie Launcher!](https://goopie.xyz)
 
 ## Current **known** issues
-* Pre-AVX2 machines can't run this at the moment, Likely to never be supported.
+* Pre-AVX2 machines can't run this at the moment, possible update to the ReXGlue build will fix this?
 * Crashes on Steam Deck (acts as if it's loading, then crashes, possibly fixed with goopie?)
 * Lotus Espirit Essex Turbo doesn't seem to load and freezes the game, solution unknown.
 * Game being on a different drive appears to cause issues, for now, keep the EXE and extracted game files on the same drive (preferably the C drive)
