@@ -1,1 +1,1 @@
-Linux support delayed until I can get it to launch into the game, if you wanna test the game on linux, use [goopie](https://goopie.xyz)
+Linux support planned for v2.1 or 2.0, whichever update it comes out in is TBD
