@@ -10,4 +10,4 @@
 * The game should launch!
 
 # Please Note:
-Steps are due to change as this project evolves, these are just steps for how to get it up and running on **Windows** (Yes I am implying something here...)
+Steps are due to change as this project evolves, these are just steps for how to get it up and running on **Windows**, other operating systems will have steps placed in here once their builds are confirmed working.
