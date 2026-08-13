@@ -5,8 +5,8 @@ This project intends to port Project Gotham Racing 4 to PC / any x86_64 hardware
 * Read up on how to get this game to launch [here](https://github.com/beatrixzy/PGR4-Recomp/blob/main/Setup.md)
 
 ## Current **known** issues
-* Pre-AVX2 machines can't run this at the moment, possible update to the ReXGlue build will fix this?
-* Crashes on Steam Deck (acts as if it's loading, then crashes, possibly fixed with goopie?)
+* Pre-AVX2 machines Haven't been tested with the new build, testing being done NOW!
+* Crashes on Steam Deck (acts as if it's loading, then crashes, testing done under Linux, Windows is fine, possibly fixed with goopie?)
 * Lotus Espirit Essex Turbo doesn't seem to load and freezes the game, solution unknown.
 * Game being on a different drive appears to cause issues, for now, keep the EXE and extracted game files on the same drive (preferably the C drive)
 ## Current Progress
