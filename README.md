@@ -6,7 +6,7 @@ This project intends to port Project Gotham Racing 4 to PC / any x86_64 hardware
 
 ## Current **known** issues
 * Pre-AVX2 machines Haven't been tested with the new build, testing being done NOW!
-* Crashes on Steam Deck (acts as if it's loading, then crashes, testing done under Linux, Windows is fine, possibly fixed with goopie?)
+* Some Tracks may not have music, reason is unknown
 * Lotus Espirit Essex Turbo doesn't seem to load and freezes the game, solution unknown.
 * Game being on a different drive appears to cause issues, for now, keep the EXE and extracted game files on the same drive (preferably the C drive)
 ## Current Progress
