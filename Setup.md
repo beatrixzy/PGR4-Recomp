@@ -6,7 +6,7 @@
 * Run extract-xiso and save the game files to a safe directory.
 * Open the ``run.bat`` file in the PGR4 Recomp area.
 * Edit the path to the game data root and save changes.
-* Run the ``start.bat``
+* Run the ``run.bat``
 * The game should launch!
 
 ## How to run on SteamOS:
