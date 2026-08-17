@@ -1,8 +1,9 @@
 # PGR4-Recomp
-This project intends to port Project Gotham Racing 4 to PC / any x86_64 hardware (providing they can run an exe).
+This project intends to port Project Gotham Racing 4 to PC / any x86_64 hardware (provided they can run an exe).
 * Join the official discord [here!](https://discord.gg/FwfykKCFTK)
-* This project is now in the approval stage on [Goopie Launcher!](https://goopie.xyz)
 * Read up on how to get this game to launch [here](https://github.com/beatrixzy/PGR4-Recomp/blob/main/Setup.md)
+
+# This project is FAR from polished and finished! Please take this into account when testing this recompilation!
 
 ## Current **known** issues
 * Pre-AVX2 machines Haven't been tested with the new build, testing being done NOW!
