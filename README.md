@@ -6,8 +6,9 @@ This project intends to port Project Gotham Racing 4 to PC / any x86_64 hardware
 # This project is FAR from polished and finished! Please take this into account when testing this recompilation!
 
 ## Current **known** issues
-* Pre-AVX2 machines Haven't been tested with the new build, testing being done NOW!
-* Some Tracks may not have music, reason is unknown
+* Pre-AVX2 machines don't launch the game, testing postponed.
+* Races may not have music, debugging happening soon.
+* Some races will freeze after another race has been finished, cause unknown.
 * Lotus Espirit Essex Turbo doesn't seem to load and freezes the game, solution unknown.
 * Game being on a different drive appears to cause issues, for now, keep the EXE and extracted game files on the same drive (preferably the C drive)
 ## Current Progress
@@ -22,3 +23,5 @@ This project intends to port Project Gotham Racing 4 to PC / any x86_64 hardware
 * Tera in the ReXGlue Discord - For allowing me to pick up from where they left off with ReXGlue
 * xextool - For allowing me to extract my XEX from a dumped ISO (seriously, that was a LIFE saver)
 * [Goopie](https://goopie.xyz) - For allowing me to house my project on there and allow users to discover this project!
+* VGEsoretica - For making a video / X post about this project, truly, the awareness is appreciated!
+* GenerationAmiga - For making an X post and article about this project, again, awareness is appreciated!
