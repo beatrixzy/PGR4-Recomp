@@ -7,7 +7,8 @@ This project intends to port Project Gotham Racing 4 to PC / any x86_64 hardware
 
 ## Current **known** issues
 * Pre-AVX2 machines don't launch the game, testing postponed.
-* Races may not have music, debugging happening soon.
+* Races may not have music, solution in the works.
+* Geometry Wars in the garage causes a crash, cause unknown.
 * Some races will freeze after another race has been finished, cause unknown.
 * Lotus Espirit Essex Turbo doesn't seem to load and freezes the game, solution unknown.
 * Game being on a different drive appears to cause issues, for now, keep the EXE and extracted game files on the same drive (preferably the C drive)
