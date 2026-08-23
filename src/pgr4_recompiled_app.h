@@ -1,4 +1,4 @@
-// pgr4_recomp - ReXGlue Recompiled Project
+// pgr4_recompiled - ReXGlue Recompiled Project
 //
 // Customize your app by overriding virtual hooks from rex::ReXApp.
 
@@ -6,13 +6,13 @@
 
 #include <rex/rex_app.h>
 
-class Pgr4RecompApp : public rex::ReXApp {
+class Pgr4RecompiledApp : public rex::ReXApp {
  public:
   using rex::ReXApp::ReXApp;
 
   static std::unique_ptr<rex::ui::WindowedApp> Create(
       rex::ui::WindowedAppContext& ctx) {
-    return std::unique_ptr<Pgr4RecompApp>(new Pgr4RecompApp(ctx, "pgr4_recomp",
+    return std::unique_ptr<Pgr4RecompiledApp>(new Pgr4RecompiledApp(ctx, "pgr4_recompiled",
         PPCImageConfig));
   }
 
@@ -26,6 +26,13 @@ class Pgr4RecompApp : public rex::ReXApp {
   // std::unique_ptr<rex::ui::ImGuiDialog> CreateAchievementsOverlay() override;
   // std::unique_ptr<rex::ui::AchievementNotificationDialog>
   // CreateAchievementNotificationDialog() override;
+  std::unique_ptr<rex::ui::AchievementNotificationDialog> CreateAchievementNotificationDialog() override {
+    // Disabled: constructing this unconditionally registers a permanent
+    // UI drawer at startup, which forces the presenter onto the paced
+    // kUIThreadOnRequest path for the whole session instead of the fast
+    // kGuestOutputThreadImmediately path.
+    return nullptr;
+  }
   // void OnShutdown() override {}
   // void OnConfigurePaths(rex::PathConfig& paths) override {}
 };
