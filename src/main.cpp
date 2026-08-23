@@ -1,7 +1,7 @@
-// pgr4_recomp - ReXGlue Recompiled Project
+// pgr4_recompiled - ReXGlue Recompiled Project
 
-#include "generated/default/pgr4_recomp_init.h"
+#include "generated/default/pgr4_recompiled_init.h"
 
-#include "pgr4_recomp_app.h"
+#include "pgr4_recompiled_app.h"
 
-REX_DEFINE_APP(pgr4_recomp, Pgr4RecompApp::Create)
+REX_DEFINE_APP(pgr4_recompiled, Pgr4RecompiledApp::Create)
