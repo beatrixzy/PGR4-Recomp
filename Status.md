@@ -9,8 +9,9 @@
 ## Current update progress
 - [x] v1 - Initial release
 - [x] v1.1 - update ReXGlue SDK + fix AVX1 device support
-- [X] ~~v1.2 - Steam Deck support (could be rectified in Goopie launcher, so this update *may* not happen)~~ Steam Deck confirmed working with Proton Experimental.
-- [ ] v2 - Native renderer (this update will take the LONGEST time out of them all, so don't expect this update to be out moderately soon.)
-- [X] ~~v2.1 - start work on Linux Native build (if not started already)~~ Not needed, as game runs under Proton Experimental
-- [ ] v3 - macOS build
-- [ ] v4 - Mod support (something to be decided on later in development)
+- [X] v1.2 - Include crowd patches
+- [ ] V1.2.1 - SDK update + experimental audio patches
+- [ ] v2 - More quality of life patches, including fixing up audio and *hopefully* the Lotus Espirit Essex Turbo
+- [ ] v2.1 - Native Renderer, longest update especially considering I am lacking free time now
+- [ ] v3 - macOS build + Linux build
+- [ ] v4 - Mod support + online support
