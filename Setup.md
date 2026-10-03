@@ -5,7 +5,7 @@
 * Run god2iso and convert the Game On Demand (god) to an ISO file.
 * Run extract-xiso and save the game files to a safe directory.
 * Open the ``run.bat`` file in the PGR4 Recomp area.
-* Edit the path to the game data root and save changes.
+* Edit the path to the game data root in the ``run.bat``, as this is where the command line arguments are kept, and save changes.
 * Run the ``run.bat``
 * The game should launch!
 
