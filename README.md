@@ -3,7 +3,7 @@ This project intends to port Project Gotham Racing 4 to PC / any x86_64 hardware
 * Join the official discord [here!](https://discord.gg/FwfykKCFTK)
 * Read up on how to get this game to launch [here](https://github.com/beatrixzy/PGR4-Recomp/blob/main/Setup.md)
 
-# This project is FAR from polished and finished! Please take this into account when testing this recompilation!
+# This project is FAR from polished and finished, and development **will** be slow! Please take this into account when testing this recompilation!
 
 ## Current **known** issues
 * Volume of music in races can't be adjusted, patch will come out in the future
