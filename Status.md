@@ -3,8 +3,8 @@
 - [X] Races work
 - [X] AI Works
 - [X] Fully stable
-- [X] Graphics Work (Crowd has been fixed!)
-- [ ] All cars work (Lotus Espirit Essex Turbo doesn't load, so thats why its unchecked)
+- [X] Graphics Work
+- [ ] All cars work (Lotus Espirit Essex Turbo doesn't load, this will be checked once the Native Renderer is implemented.)
 
 ## Current update progress
 - [x] v1 - Initial release
