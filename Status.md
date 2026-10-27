@@ -7,6 +7,7 @@
 - [x] All cars work, including DLC
 - [x] Title Updates & DLC Work
 - [x] Radio fully works
+- [x] Online Functionality
 
 ## Current update progress
 - [x] v1 - Initial release
