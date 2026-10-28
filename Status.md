@@ -8,6 +8,7 @@
 - [x] Title Updates & DLC Work
 - [x] Radio fully works
 - [x] Online Functionality
+- [x] Geometry Wars: Waves Support
 
 ## Current update progress
 - [x] v1 - Initial release
