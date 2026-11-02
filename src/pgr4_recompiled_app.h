@@ -5,12 +5,20 @@
 // both 0: SDK Xenos GPU plugin.
 #pragma once
 
+#include <algorithm>
+#include <cctype>
+#include <chrono>
+#include <cstdio>
 #include <filesystem>
 #include <memory>
+#include <optional>
 #include <string>
+#include <thread>
 
+#include <rex/cvar.h>
 #include <rex/rex_app.h>
 #include <rex/system.h>
+#include <rex/kernel/xam/module.h>
 #include <rex/ui/window.h>
 
 #include "content/dlc.h"
@@ -19,11 +27,24 @@
 #if PGR4_D3D12_RENDERER
 #include <rex/ui/imgui_drawer.h>
 
+#include "gpu/hooks/hooks.h"
 #include "gpu/imgui_drawer.h"
+#include "gpu/renderer.h"
 #include "gpu/video.h"
 #elif PGR4_NATIVE_RENDERER
 #include "render/graphics_system.h"
 #endif
+
+// Geometry Wars: Waves (gw.xex), the arcade machine in PGR4's garage, is
+// linked in as a second title (gw/gw_manifest.toml, symbols prefixed gw_).
+// Only its image info is named here: its generated headers redefine the same
+// configuration macros as PGR4's.
+extern const rex::PPCImageInfo gw_PPCImageConfig;
+
+REXCVAR_DEFINE_STRING(boot_title, "", "PGR4",
+                      "Start in another title instead of PGR4: gw (Geometry Wars: Waves), or "
+                      "gw_arcade (Geometry Wars with the launch data PGR4's arcade passes)")
+    .lifecycle(rex::cvar::Lifecycle::kInitOnly);
 
 class Pgr4RecompiledApp : public rex::ReXApp {
 public:
@@ -31,8 +52,13 @@ public:
 
   static std::unique_ptr<rex::ui::WindowedApp>
   Create(rex::ui::WindowedAppContext &ctx) {
-    return std::unique_ptr<Pgr4RecompiledApp>(new Pgr4RecompiledApp(
-        ctx, "pgr4_recompiled", PPCImageConfig));
+    const std::string boot = REXCVAR_GET(boot_title);
+    const bool gw = boot == "gw" || boot == "gw_arcade";
+    auto app = std::unique_ptr<Pgr4RecompiledApp>(new Pgr4RecompiledApp(
+        ctx, "pgr4_recompiled", gw ? gw_PPCImageConfig : PPCImageConfig));
+    app->boot_gw_ = gw;
+    app->boot_gw_arcade_ = boot == "gw_arcade";
+    return app;
   }
 
 protected:
@@ -42,9 +68,17 @@ protected:
   // the TU's own data. Kept out of the game root so the base default.xex stays
   // unpatched for base builds sharing the same game files.
   static constexpr const char *kTitleUpdateDir = "TitleUpdate";
+  static constexpr const char *kLeaderboardServer =
+      "https://pgr4-leaderboard.pgr4-leaderboard.workers.dev";
 
   void OnConfigurePaths(rex::PathConfig &paths) override {
     pgr4::content::DumpCvarsAndExitIfRequested();
+    // Online leaderboards (PGR4-Leaderboard on Cloudflare) unless the launcher
+    // or command line set stats_server to another URL; "off" turns them off.
+    if (const auto server = rex::cvar::GetFlagByName("stats_server");
+        server.empty() || server == "on") {
+      rex::cvar::SetFlagByName("stats_server", kLeaderboardServer);
+    }
     const auto tu_dir = paths.game_data_root / kTitleUpdateDir;
     if (!pgr4::content::InstallTitleUpdate(paths.game_data_root, tu_dir)) {
       rex::ShowSimpleMessageBox(
@@ -58,9 +92,47 @@ protected:
     }
   }
 
+  // Both titles load from TitleUpdate, beside their patches (default.xexp,
+  // gw.xexp), when the title update is there.
   void OnLoadXexImage(std::string &xex_image) override {
-    xex_image = std::string("game:\\") + kTitleUpdateDir + "\\default.xex";
+    if (boot_gw_) {
+      boot_gw_ = false; // --boot_title=gw: the first image is Geometry Wars
+      xex_image = "game:\\gw.xex";
+    }
+    const std::string name = XexName(xex_image);
+    if (name == "default.xex" ||
+        (name == "gw.xex" && std::filesystem::is_regular_file(update_data_root() / "gw.xexp") &&
+         std::filesystem::is_regular_file(update_data_root() / "gw.xex"))) {
+      xex_image = std::string("game:\\") + kTitleUpdateDir + "\\" + name;
+    }
   }
+
+  // PGR4's arcade launches Geometry Wars with XamLoaderLaunchTitle
+  // ("GAME:\gw.xex"), and Geometry Wars goes back the same way: the app
+  // switches titles in-process, as the 360 does.
+  std::optional<rex::PPCImageInfo> OnResolveTitle(const std::string &xex_image) override {
+    const std::string name = XexName(xex_image);
+    if (name == "gw.xex") {
+      return gw_PPCImageConfig;
+    }
+    if (name == "default.xex") {
+      return PPCImageConfig;
+    }
+    return std::nullopt;
+  }
+
+  // Lower-case file name of a guest path ("GAME:\gw.xex" -> "gw.xex").
+  static std::string XexName(std::string_view path) {
+    const size_t slash = path.find_last_of("\\/:");
+    std::string name(slash == std::string_view::npos ? path : path.substr(slash + 1));
+    std::transform(name.begin(), name.end(), name.begin(),
+                   [](unsigned char c) { return char(std::tolower(c)); });
+    return name;
+  }
+
+  static constexpr uint32_t kGeometryWarsTitleId = 0x4D5307F9;
+  bool boot_gw_ = false;
+  bool boot_gw_arcade_ = false;
 
 #if PGR4_D3D12_RENDERER
   void OnPreSetup(rex::RuntimeConfig &config) override {
@@ -78,10 +150,71 @@ protected:
   }
 
   // Title id is known once the module is loaded; the guest has not run yet.
+  // After a title switch this runs again, for Geometry Wars or PGR4.
   void OnPostLaunchModule(rex::system::XThread *) override {
-    pgr4::StartProfiler();
-    pgr4::content::InstallDLC();
-    pgr4::content::DumpGuestImage();
+    const bool pgr4 = runtime()->kernel_state()->title_id() != kGeometryWarsTitleId;
+    pgr4::gpu::Renderer::SetTitle(pgr4);
+    if (first_launch_) {
+      first_launch_ = false;
+      pgr4::StartProfiler();
+      std::thread([this] { WatchForLaunchFile(); }).detach();
+    }
+    if (pgr4) {
+      pgr4::content::InstallDLC();
+      pgr4::content::DumpGuestImage();
+    } else {
+      pgr4::content::DumpGuestImage(uint32_t(gw_PPCImageConfig.image_size));
+      if (boot_gw_arcade_) {
+        // PGR4's arcade (sub_825CC2B8) sets launch data "2" before launching.
+        boot_gw_arcade_ = false;
+        if (auto xam = runtime()->kernel_state()->GetKernelModule<rex::kernel::xam::XamModule>(
+                "xam.xex")) {
+          xam->loader_data().launch_data_present = true;
+          xam->loader_data().launch_data = {'2'};
+        }
+      }
+    }
+  }
+
+  // The old title's guest threads have stopped; its memory goes next.
+  void OnTitleSwitch(const std::string &) override {
+    pgr4::gpu::Renderer::ResetForTitleSwitch();
+    pgr4::gpu::hooks::ResetForTitleSwitch();
+  }
+
+  bool first_launch_ = true;
+
+  // Debug: a launch.now file in the working directory holding a guest path
+  // ("GAME:\gw.xex", "GAME:\default.xex") makes the running title launch it,
+  // as XamLoaderLaunchTitle does, so title switches can be tested unattended.
+  void WatchForLaunchFile() {
+    for (;;) {
+      std::this_thread::sleep_for(std::chrono::milliseconds(250));
+      std::string path;
+      if (std::FILE *f = std::fopen("launch.now", "rb")) {
+        char text[260] = {};
+        std::fgets(text, sizeof(text), f);
+        std::fclose(f);
+        std::remove("launch.now");
+        path = text;
+        while (!path.empty() && (path.back() == '\n' || path.back() == '\r' || path.back() == ' ')) {
+          path.pop_back();
+        }
+      }
+      if (path.empty()) {
+        continue;
+      }
+      app_context().CallInUIThread([this, path] {
+        auto *kernel = runtime() ? runtime()->kernel_state() : nullptr;
+        auto xam = kernel ? kernel->GetKernelModule<rex::kernel::xam::XamModule>("xam.xex") : nullptr;
+        if (!xam) {
+          return;
+        }
+        REXLOG_INFO("[debug] launch.now: launching {}", path);
+        xam->loader_data().launch_path = path;
+        kernel->TerminateTitle();
+      });
+    }
   }
 
   // The SDK builds its ImGui overlays (Backtick: console log, F3: debug,
