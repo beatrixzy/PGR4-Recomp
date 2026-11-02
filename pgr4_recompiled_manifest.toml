@@ -10,6 +10,18 @@ file_path = "../PGR4-Files/TitleUpdate/default.xex"
 out_directory_path = "generated/default"
 setjmp_address = 0x828de260
 longjmp_address = 0x828de7e0
+# Register-as-local codegen (from pgr4-native, after UnleashedRecomp): guest
+# CR, CTR, XER, the reservation and the non-volatile registers become C++
+# locals instead of PPCContext fields; arguments and r1 stay in ctx. Measured
+# there on the race: -17.9 % frame time. skip_lr, skip_msr and
+# non_argument_as_local stay off: two blrl sites branch to ctx.lr, the
+# mtmsrd pairs are the global lock, and ~845 exception funclets take their
+# frame pointer in r12.
+cr_as_local = true
+ctr_as_local = true
+xer_as_local = true
+non_volatile_as_local = true
+reserved_as_local = true
 includes = [
   "config/d3d_functions.toml",
 ]
@@ -39,6 +51,8 @@ includes = [
 0x8278C8C0 = {}
 0x8291BD58 = {}
 0x8291BD60 = {}
+# Vtable stub (li r3,1; blr) at 0x821BF980 the analyser missed: crash log 018
+0x8252CCF8 = {}
 
 # Title update: this-adjust thunks (addi r3,r3,-N; b) reached through vtables
 0x827348E0 = {}
