@@ -23,6 +23,12 @@ include(generated/rexglue.cmake)
 set(PGR4RECOMPILED_SOURCES
     src/main.cpp
     src/music_volume_hook.cpp
+    src/ground_query_guard.cpp
+    src/session_debug.cpp
+    src/stream_flush_guard.cpp
+    src/audio_lock_trace.cpp
+    src/occlusion_query.cpp
+    src/walk_camera_pace.cpp
     src/content/dlc.cpp
     src/profiler.cpp
 )
@@ -38,8 +44,11 @@ if(PGR4_D3D12_RENDERER)
         src/gpu/hooks/draw.cpp
         src/gpu/hooks/shader.cpp
         src/gpu/hooks/state.cpp
+        src/gpu/hooks/gw.cpp
         src/gpu/fault_trace.cpp
     )
+else()
+    list(APPEND PGR4RECOMPILED_SOURCES src/xenos_debug.cpp)
 endif()
 
 if(WIN32)
@@ -59,6 +68,16 @@ if(PGR4_D3D12_RENDERER)
     endif()
     add_subdirectory("${PGR4_PLUME_DIR}" plume EXCLUDE_FROM_ALL)
 
+    # Debug info for the renderer and Plume only (the generated guest code is
+    # left alone), so render thread samples (profile_render_thread) resolve.
+    option(PGR4_PROFILE_SYMBOLS "Debug info for the renderer and Plume, for CPU profiling" OFF)
+    if(PGR4_PROFILE_SYMBOLS)
+        set_source_files_properties(src/gpu/renderer.cpp src/gpu/video.cpp src/gpu/texture_convert.cpp
+            src/gpu/shader_cache.cpp PROPERTIES COMPILE_OPTIONS "-g;-gcodeview")
+        target_compile_options(plume PRIVATE -g -gcodeview)
+        target_link_options(pgr4_recompiled PRIVATE "LINKER:/DEBUG")
+    endif()
+
     # Host shaders (ImGui overlay) compiled to shader model 5.1 DXBC headers
     # with fxc, which every D3D12 GPU accepts (DXIL needs SM 6.0 drivers).
     find_program(PGR4_FXC fxc
@@ -66,7 +85,8 @@ if(PGR4_D3D12_RENDERER)
         REQUIRED)
     set(PGR4_HOST_SHADER_DIR "${CMAKE_CURRENT_BINARY_DIR}/host_shaders")
     set(PGR4_HOST_SHADER_HEADERS)
-    foreach(shader IN ITEMS imgui_vs:vs_5_1 imgui_ps:ps_5_1 present_vs:vs_5_1 present_ps:ps_5_1)
+    foreach(shader IN ITEMS imgui_vs:vs_5_1 imgui_ps:ps_5_1 present_vs:vs_5_1 present_ps:ps_5_1
+                        solid_ps:ps_5_1)
         string(REPLACE ":" ";" parts "${shader}")
         list(GET parts 0 stem)
         list(GET parts 1 profile)
@@ -129,6 +149,50 @@ elseif(PGR4_NATIVE_RENDERER)
 else()
     rexglue_setup_target(pgr4_recompiled GPU_PLUGINS xenos)
     target_compile_definitions(pgr4_recompiled PRIVATE PGR4_D3D12_RENDERER=0 PGR4_NATIVE_RENDERER=0)
+endif()
+
+# Geometry Wars: Waves (gw.xex), the arcade machine in PGR4's garage. PGR4
+# launches it with XamLoaderLaunchTitle; the app switches to it in-process
+# (src/pgr4_recompiled_app.h). Its recompiled code is a second title in this
+# exe, generated from gw/gw_manifest.toml with every symbol prefixed gw_, and
+# built with its own PCH (its image configuration macros differ from PGR4's).
+# Its codegen lives in gw/ so its glue never replaces generated/rexglue.cmake.
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/gw/generated/sources.cmake")
+    include(gw/generated/sources.cmake)
+    set(PGR4_GW_SOURCES ${GENERATED_SOURCES})
+    set_source_files_properties(${PGR4_GW_SOURCES} PROPERTIES COMPILE_OPTIONS "${REXGLUE_RECOMP_OPTIONS}")
+    add_custom_command(
+        OUTPUT "${CMAKE_CURRENT_SOURCE_DIR}/gw/generated/codegen.build.stamp" ${PGR4_GW_SOURCES}
+        COMMAND $<TARGET_FILE:rex::rexglue> codegen ${CMAKE_CURRENT_SOURCE_DIR}/gw/gw_manifest.toml
+        DEPFILE "${CMAKE_CURRENT_SOURCE_DIR}/gw/generated/codegen.d"
+        WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/gw
+        COMMENT "Generating recompiled code for Geometry Wars"
+        VERBATIM)
+    add_custom_target(pgr4_gw_codegen DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/gw/generated/codegen.build.stamp")
+    add_library(pgr4_gw_recomp OBJECT ${PGR4_GW_SOURCES})
+    target_include_directories(pgr4_gw_recomp PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/gw/generated)
+    target_link_libraries(pgr4_gw_recomp PRIVATE rex::runtime)
+    rexglue_apply_target_settings(pgr4_gw_recomp)
+    rexglue_apply_recomp_settings(pgr4_gw_recomp "${CMAKE_CURRENT_SOURCE_DIR}/gw/generated/gw_pch.h")
+    add_dependencies(pgr4_gw_recomp pgr4_gw_codegen)
+    target_link_libraries(pgr4_recompiled PRIVATE pgr4_gw_recomp)
+endif()
+
+# Online System Link over Epic Online Services (any renderer, Xenos too): the
+# runtime loads this DLL and reads eos_credentials.ini beside the exe; both
+# are optional and only used with --net_transport=eos.
+set(PGR4_EOS_SDK_DIR "C:/Users/Bea/Documents/EOS-SDK/SDK" CACHE PATH "EOS SDK folder")
+if(EXISTS "${PGR4_EOS_SDK_DIR}/Bin/EOSSDK-Win64-Shipping.dll")
+    add_custom_command(TARGET pgr4_recompiled POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy_if_different "${PGR4_EOS_SDK_DIR}/Bin/EOSSDK-Win64-Shipping.dll"
+                "$<TARGET_FILE_DIR:pgr4_recompiled>"
+        VERBATIM)
+endif()
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/eos_credentials.ini")
+    add_custom_command(TARGET pgr4_recompiled POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy_if_different "${CMAKE_CURRENT_SOURCE_DIR}/eos_credentials.ini"
+                "$<TARGET_FILE_DIR:pgr4_recompiled>"
+        VERBATIM)
 endif()
 
 # Launcher: game folder, GPU / shader format, title update and DLC packages.
