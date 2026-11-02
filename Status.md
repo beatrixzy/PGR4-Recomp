@@ -9,7 +9,7 @@
 - [x] Radio fully works
 - [x] Online Functionality
 - [x] Geometry Wars: Waves Support
-- [x] Did I mention wheel support?
+- [x] Did I mention wheel support? I sure hope so
 
 ## Current update progress
 - [x] v1 - Initial release
