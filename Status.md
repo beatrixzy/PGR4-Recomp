@@ -10,6 +10,7 @@
 - [x] Online Functionality
 - [x] Geometry Wars: Waves Support
 - [x] Did I mention wheel support? I sure hope so
+- [x] Cut Feature A - the game didn't have this originally!
 
 ## Current update progress
 - [x] v1 - Initial release
