@@ -8,8 +8,7 @@ This project intends to port Project Gotham Racing 4 to PC / any x86_64 hardware
 ## v2 is in the works! Release will be around November 10th!
 
 ## Current **known** issues
-* Geometry Wars in the garage causes a crash, will be using [Re:Blue's](https://github.com/zolaware/reblue) multi-xex bootstrapper to get it working.
-* Game being on a different drive appears to cause issues, for now, put quotation marks around the path (e.g. ``"D:/Games/PGR4-Files"``)
+* None, as v2 has fixed MANY bugs!
 ## Current Progress
 * Check out the status [here!](https://github.com/beatrixzy/PGR4-Recomp/blob/main/Status.md)
 ### Future plans
