@@ -1,12 +1,7 @@
 ## Current status of the recompilation
-- [x] UI Renders
-- [X] Races work
-- [X] AI Works
-- [X] Fully stable
-- [X] Graphics Work
-- [x] All cars work, including DLC
+- [x] Base game works with little to no issues
+- [X] Stable (Including graphics)
 - [x] Title Updates & DLC Work
-- [x] Radio fully works
 - [x] Online Functionality
 - [x] Geometry Wars: Waves Support
 - [x] Did I mention wheel support? I sure hope so
@@ -17,6 +12,6 @@
 - [x] v1.1 - update ReXGlue SDK + fix AVX1 device support
 - [X] v1.2 - Include crowd patches
 - [x] v1.2.1 - SDK update + experimental audio patches
-- [ ] v2 - Quality of life patches, Native Rendering and Netplay (Update is in active development, comes out November 10th!)
+- [x] v2 - Quality of life patches, Native Rendering and Netplay (Update is in active development, comes out November 10th!)
 - [ ] v3 - Linux build
 - [ ] v4 - Introduction of the modding framework
