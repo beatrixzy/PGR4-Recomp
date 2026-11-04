@@ -4,10 +4,9 @@
 * Download [god2iso](https://github.com/raburton/god2iso) (necessary for a dump from an actual disk!!!)
 * Run god2iso and convert the Game On Demand (god) to an ISO file.
 * Run extract-xiso and save the game files to a safe directory.
-* Open the ``run.bat`` file in the PGR4 Recomp area.
-* Edit the path to the game data root in the ``run.bat``, as this is where the command line arguments are kept, and save changes.
-* Run the ``run.bat``
-* The game should launch!
+* Open ``pgr4_launcher.exe``, set your username, any other video options and add title updates and DLC (you'll need to find those files, as the game doesn't launch without the title update!)
+* Press the "Play" button in the launcher.
+* The game should launch! Any other video options can be changed by going into Options > Game Adjustments, FXAA, MSAA, FOV Adjustment, Wheel Adjustments, Button Remapping are all included in there!
 
 ## How to run on SteamOS:
 * Go into Desktop Mode
