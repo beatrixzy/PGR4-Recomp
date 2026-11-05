@@ -11,8 +11,6 @@ This project intends to port Project Gotham Racing 4 to PC / any x86_64 hardware
 * None, as v2 has fixed MANY bugs!
 ## Current Progress
 * Check out the status [here!](https://github.com/beatrixzy/PGR4-Recomp/blob/main/Status.md)
-### Future plans
-* Read up on the future plans [here!](https://github.com/beatrixzy/PGR4-Recomp/blob/main/Future-plans.md)
 ## Notes
 * Anyone wanting to help with this project, or create a fork of this project, please message me on Discord, I'm very active there so that's the easiest way to get a hold of me.
 * I go by beatrixzy on all platforms
