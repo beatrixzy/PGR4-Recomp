@@ -4,8 +4,10 @@
 - [x] Title Updates & DLC Work
 - [x] Online Functionality
 - [x] Geometry Wars: Waves Support
-- [x] Did I mention wheel support? I sure hope so
+- [x] Unofficial Wheel Support
 - [x] Cut Feature A - the game didn't have this originally!
+- [x] Controller / Wheel Remapping Support
+- [x] FXAA / MSAA Support (glorious smoothing)
 
 ## Current update progress
 - [x] v1 - Initial release
