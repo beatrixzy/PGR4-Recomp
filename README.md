@@ -5,7 +5,7 @@ This project intends to port Project Gotham Racing 4 to PC / any x86_64 hardware
 
 # This project is FAR from polished and finished, and updates **will** be vastly distributed from one another!
 
-## v2 is in the works! Release will be around November 10th!
+## v2 is in the works! Release will be around November 15th!
 
 ## Current **known** issues
 * None, as v2 has fixed MANY bugs!
