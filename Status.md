@@ -14,6 +14,7 @@
 - [x] v1.1 - update ReXGlue SDK + fix AVX1 device support
 - [X] v1.2 - Include crowd patches
 - [x] v1.2.1 - SDK update + experimental audio patches
-- [x] v2 - Quality of life patches, Native Rendering and Netplay (Update is in active development, comes out November 15th!)
-- [ ] v3 - Linux build
+- [x] v2 - Quality of life patches, Native Rendering and Netplay
+- [ ] v2.1 - ???
+- [ ] v3 - Linux build, more potential optimisations
 - [ ] v4 - Introduction of the modding framework
