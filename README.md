@@ -5,7 +5,7 @@ This project intends to port Project Gotham Racing 4 to PC / any x86_64 hardware
 
 # This project is FAR from polished and finished, and updates **will** be vastly distributed from one another!
 
-## I am now on a big fat break, nearly 2 straight months of working on this game has tired me out, so the next update will probably be in early / mid 2027, as I have to focus on my studies at school, thanks for supporting me along the way :)
+## As of v2's release, I am now on a big fat break, nearly 2 straight months of working on this game has tired me out, so the next update will probably be in early / mid 2027, as I have to focus on my studies at school, thanks for supporting me along the way :)
 
 ## Current **known** issues
 * Some reflections on the road in Ultrawide will be offset - side effect of the Ultrawide implementation
