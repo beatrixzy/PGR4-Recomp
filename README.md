@@ -5,10 +5,10 @@ This project intends to port Project Gotham Racing 4 to PC / any x86_64 hardware
 
 # This project is FAR from polished and finished, and updates **will** be vastly distributed from one another!
 
-## v2 is in the works! Release will be around November 15th!
-
 ## Current **known** issues
-* None, as v2 has fixed MANY bugs!
+* Some reflections on the road in Ultrawide will be offset - side effect of the Ultrawide implementation
+* Tire screeching noises from doing drifts are missing / abnormally quiet - tried to resolve but couldn't find the cause
+
 ## Current Progress
 * Check out the status [here!](https://github.com/beatrixzy/PGR4-Recomp/blob/main/Status.md)
 ## Notes
