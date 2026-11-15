@@ -2,6 +2,7 @@
 This project intends to port Project Gotham Racing 4 to PC / any x86_64 hardware (provided they can run an exe).
 * Join the official discord [here!](https://discord.gg/FwfykKCFTK)
 * Read up on how to get this game to launch [here](https://github.com/beatrixzy/PGR4-Recomp/blob/main/Setup.md)
+* Setup DLC [here!](https://github.com/beatrixzy/PGR4-Recomp/blob/main/DLC%26TU.md)
 
 # This project is FAR from polished and finished, and updates **will** be vastly distributed from one another!
 
