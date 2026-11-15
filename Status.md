@@ -5,7 +5,7 @@
 - [x] Online Functionality
 - [x] Geometry Wars: Waves Support
 - [x] Unofficial Wheel Support
-- [x] Cut Feature A - the game didn't have this originally!
+- [x] 3/4 Player Local Split screen
 - [x] Controller / Wheel Remapping Support
 - [x] FXAA / MSAA Support (glorious smoothing)
 
