@@ -15,6 +15,7 @@ This project intends to port Project Gotham Racing 4 to PC / any x86_64 hardware
 * Manual shifting does sometimes get missed - a partial patch is implemented to get less missed as possible
 * Geometry Wars sometimes ignores inputs - 
 Due to the UI patches I made to prevent skipping at higher FPS
+* Online is bugged - due to Voice Chat lobbies interfering.
 
 ## Current Progress
 * Check out the status [here!](https://github.com/beatrixzy/PGR4-Recomp/blob/main/Status.md)
