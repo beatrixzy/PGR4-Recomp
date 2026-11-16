@@ -4,7 +4,7 @@ This project intends to port Project Gotham Racing 4 to PC / any x86_64 hardware
 * Read up on how to get this game to launch [here](https://github.com/beatrixzy/PGR4-Recomp/blob/main/Setup.md)
 * Setup DLC [here!](https://github.com/beatrixzy/PGR4-Recomp/blob/main/DLC%26TU.md)
 
-# This project is FAR from polished and finished, and updates **will** be vastly distributed from one another!
+## AI Disclaimer: AI was used in the development of v2, to get features implemented, everything else was human made, I wanted to make this all myself, but v2 would have taken much, much longer, apologies if this is a let down for some.
 
 ## As of v2's release, I am now on a big fat break, nearly 2 straight months of working on this game has tired me out, so the next update will probably be in early / mid 2027, as I have to focus on my studies at school, thanks for supporting me along the way :)
 
